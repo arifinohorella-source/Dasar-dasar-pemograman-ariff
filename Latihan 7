@@ -1,0 +1,66 @@
+import random
+
+# Papan ular tangga
+# Key: posisi awal, Value: posisi tujuan
+ular_tangga = {
+    4: 14,
+    9: 31,
+    17: 7,
+    20: 38,
+    28: 84,
+    40: 59,
+    51: 67,
+    54: 34,
+    62: 19,
+    63: 81,
+    64: 60,
+    71: 91,
+    87: 24,
+    93: 73,
+    95: 75,
+    99: 78
+}
+
+def lempar_dadu():
+    return random.randint(1, 6)
+
+def main():
+    pemain = {1: 0, 2: 0}  # posisi awal pemain
+    giliran = 1
+
+    print("=== GAME ULAR TANGGA ===")
+    print("Pemain 1 vs Pemain 2\n")
+
+    while True:
+        input(f"Giliran Pemain {giliran}, tekan ENTER untuk lempar dadu...")
+        dadu = lempar_dadu()
+        print(f"Pemain {giliran} melempar dadu: {dadu}")
+
+        # Update posisi
+        pemain[giliran] += dadu
+
+        if pemain[giliran] > 100:
+            pemain[giliran] -= dadu  # tidak boleh lebih dari 100
+            print("Melebihi 100, posisi tidak berubah.")
+        else:
+            # cek ular/tangga
+            if pemain[giliran] in ular_tangga:
+                tujuan = ular_tangga[pemain[giliran]]
+                if tujuan > pemain[giliran]:
+                    print("Naik tangga! 🎉")
+                else:
+                    print("Digigit ular! 🐍")
+                pemain[giliran] = tujuan
+
+        print(f"Posisi Pemain {giliran}: {pemain[giliran]}\n")
+
+        # cek menang
+        if pemain[giliran] == 100:
+            print(f"=== PEMAIN {giliran} MENANG! ===")
+            break
+
+        # ganti giliran
+        giliran = 2 if giliran == 1 else 1
+
+if __name__ == "__main__":
+    main()
