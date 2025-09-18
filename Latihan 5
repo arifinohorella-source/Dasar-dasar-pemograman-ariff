@@ -1,0 +1,4 @@
+my_list = [1, "binatang " ,3.14]
+my_list[1] = "hewan" # megubah elemen
+my_list.append(1000000000000) # megubah elemen
+print(my_list) # output: [1, 'binatang' ,3.14']
